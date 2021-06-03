@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fashion_system_main,access.fashion.system,model_fashion_garment,base.group_user,1,1,1,1
+access_order_fashion_main,access.order.fashion,model_order,base.group_user,1,1,1,1
+access_orderline_fashion_main,access.orderline.fashion,model_order_line,base.group_user,1,1,1,1
+access_order_discount_restarauant,access.discount.wiz.restaurant,model_discount_wizard,base.group_user,1,1,1,1
+access_order_fullname_conversion,access.name.conversion,model_name_conversion,base.group_user,1,1,1,

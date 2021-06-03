@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+          <record id="view_name_conversion_form" model="ir.ui.view">
+            <field name="name">name.conversion.form</field>
+            <field name="model">name.conversion</field>
+            <field name="arch" type="xml">
+              <form string="Name Conversation">
+                <sheet>
+                  <group>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                  </group>
+                </sheet>
+                <footer>
+                  <button type="object" name="concat" string="Done"/>
+                </footer>
+              </form>
+            </field>
+          </record>
+
+          <record id="action_view_name_conversion_act" model="ir.actions.act_window">
+            <field name="name">Full Name</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">name.conversion</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field><!--Target new will open the form in new window-->
+            <!-- TODO: check if we need this -->
+            <!-- Binding model means on which model this wizard is to be
+                 called-->
+            <field name="binding_model_id" ref="fashion_system.model_order" />
+            <!--<field name="binding_view_types">list</field>-->
+        </record>
+
+        </odoo>

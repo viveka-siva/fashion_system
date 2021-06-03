@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="fashion_system_root"
+                  name="Fashion System"
+                  sequence="2"/>
+
+        <menuitem id="fashion_system_order"
+              name="Order"
+              sequence="2"
+              parent="fashion_system.fashion_system_root"/>
+
+        <record id="view_order_form" model="ir.ui.view">
+            <field name="name">view.order.form</field>
+            <field name="model">order</field>
+            <field name="arch" type="xml">
+                <form string="Order">
+                    <header>
+                        <button type="object" name="calculate_total" string="Total"/>
+                        <button name="%(fashion_system.action_view_discount_wizard_restaurant)d" string="Give Discount" type="action" class="btn-primary"/>
+                        <button name="%(fashion_system.action_view_name_conversion_act)d" string="Full Name" type="action" class="btn btn-success"/>
+<!--                        <button type="object" name="discount" string="Discount"/>-->
+
+                    </header>
+                    <sheet>
+                        <group>
+                          <group>
+                              <group>
+                                  <field name="name"/>
+                                  <field name="order_date"/>
+                                  <field name="quantity"/>
+                              </group>
+                              <group>
+                                   <field name="price"/>
+                                    <field name="total"/>
+<!--                                    <field name="discount_per"/>-->
+                              </group>
+                          </group>
+                             <group name="Order" string="Order Line">
+<!--                                  <label for = "orderlines_ids" string="orderlines"/>-->
+                                 <field name="orderlines_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                            <field name="customer"/>
+                                            <field name="price"/>
+                                            <field name="quantity"/>
+                                            <field name="total"/>
+                                            <field name="garment_type"/>
+                                    </tree>
+                                 </field>
+                             </group>
+                        </group>
+                   </sheet>
+               </form>
+            </field>
+        </record>
+        <record id="view_order_list" model="ir.ui.view">
+            <field name="name">view.order.list</field>
+            <field name="model">order</field>
+            <field name="arch" type="xml">
+                <tree string="Order Date">
+                    <field name="name"/>
+                    <field name="order_date"/>
+                    <field name="quantity"/>
+<!--                    <field name="orderlines_ids" nolable="1"/>-->
+                    <field name="price"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_order" model="ir.actions.act_window">
+            <field name="name">Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_view_order_list_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fashion_system.view_order_list"/>
+            <field name="act_window_id" ref="action_order"/>
+        </record>
+
+        <record id="view_action_order_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fashion_system.view_order_form"/>
+            <field name="act_window_id" ref="action_order"/>
+        </record>
+
+         <record id="view_orderline_form" model="ir.ui.view">
+            <field name="name">view.orderline.form</field>
+            <field name="model">order.line</field>
+            <field name="arch" type="xml">
+                <form string="Order line">
+                    <sheet>
+                        <group>
+                          <group>
+                              <field name="customer"/>
+                              <field name="price"/>
+                              <field name="quantity"/>
+                              <field name="price"/>
+                              <field name="total"/>
+                              <field name="garment_type"/>
+                          </group>
+                                <group>
+                                    <field name="garment_id" nolable="1"/>
+                                </group>
+                        </group>
+                        <group>
+                            <field name="order_ids" nolable="1"/>
+                        </group>
+                   </sheet>
+               </form>
+            </field>
+        </record>
+        <record id="view_orderline_list" model="ir.ui.view">
+            <field name="name">view.orderline.list</field>
+            <field name="model">order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Order line Date">
+<!--                    <field name="name"/>-->
+                              <field name="customer"/>
+                              <field name="price"/>
+                              <field name="quantity"/>
+                              <field name="total"/>
+                              <field name="order_ids"/>
+                              <field name="garment_type"/>
+<!--                              <field name="garment_id" nolable="1"/>-->
+                    </tree>
+            </field>
+        </record>
+        <record id="action_order_line" model="ir.actions.act_window">
+            <field name="name">Order Line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">order.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_view_orderline_list_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="fashion_system.view_orderline_list"/>
+            <field name="act_window_id" ref="action_order_line"/>
+        </record>
+        <record id="view_garment_orderline_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="fashion_system.view_orderline_form"/>
+            <field name="act_window_id" ref="action_order_line"/>
+        </record>
+
+        <menuitem id="fashion_action_orderlne_action"
+              name="Order Line List"
+              sequence="2"
+              parent="fashion_system.fashion_system_order"
+              action="fashion_system.action_order_line"/>
+
+        <menuitem id="fashion_system_order_action"
+              name="Order List"
+              sequence="2"
+              parent="fashion_system.fashion_system_order"
+              action="fashion_system.action_order"/>
+    </data>
+</odoo>
